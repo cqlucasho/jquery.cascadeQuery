@@ -70,4 +70,5 @@
 			// 是否跨域请求
 			crossDomain: false
 		};
+	};
 })(window.jQuery);
