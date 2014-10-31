@@ -3,26 +3,32 @@
 		this.data = $data;
 		this.opts = $opts;
 
-		// ³ÇÊĞÇøÏØÁª¼¶²éÑ¯
+		// ä¾‹å¦‚ï¼šåŸå¸‚åŒºå¿çº§è”æŸ¥è¯¢
 		this.areaLinkQuery = function () {
+			// evalè½¬æ¢è§†æƒ…å†µè€Œå®šï¼Œè¿”å›çš„æ˜¯å­—ç¬¦ä¸²JSONæ ¼å¼æ‰éœ€è¦è½¬æ¢ã€‚
 			var obj = eval('(' + this.data + ')');
+			
 			var html = '<option>' + this.opts.title + '</option>';
 			$.each(obj, function (index, town) {
 				html += '<option value="' + town.TownID + '">' + town.TownName + '</option>';
 			});
 
-			this.opts.fillEle.empty().append(html);
+			this.opts.fill.empty().append(html);
 		}
+		
+		// æ·»åŠ å…¶å®ƒæ–¹æ³•
+		this.xxx = function() {}
 	}
 
-	$.fn.cityTownQuery = function ($options) {
-		var opts = $.extend({}, $.fn.cityTownQuery.defaults, $options);
+	$.fn.cascadeQuery = function ($options) {
+		var opts = $.extend({}, $.fn.cascadeQuery.defaults, $options);
 		var values = '{';
 
 		if (!opts.crossDomain) {
+			// Changeäº‹ä»¶è§¦å‘
 			$(this).change(function () {
 				if (opts.postData !== null) {
-					$.each(opts.postData, function (index, dataValue) {
+					$.each(opts.data, function (index, dataValue) {
 						if (index > 0) values += ',';
 
 						if ($.isNumeric(dataValue)) {
@@ -35,13 +41,13 @@
 					});
 					values += '}';
 
-					$.post(opts.postUrl, JSON.parse(values), function (data) {
+					$.post(opts.url, JSON.parse(values), function (data) {
 						var html = new HtmlRespones(data, opts);
-						html.areaLinkQuery();
+						html.è°ƒç”¨æ–¹æ³•;
 					});
 				}
 				else {
-					alert("postData is null");
+					alert("post data is null");
 				}
 			});
 		}
@@ -49,29 +55,24 @@
 			$(this).change(function () {
 				var id = $(this).val();
 
-				$.getJSON(opts.postUrl, { id: id }, function (data) {
-					var obj = eval('(' + data + ')');
-					var html = '<option>' + opts.title + '</option>';
-					$.each(obj, function (index, town) {
-						html += '<option value="' + town.TownID + '">' + town.TownName + '</option>';
-					});
-
-					$(opts.fillEle).empty().append(html);
+				$.getJSON(opts.url, JSON.parse(values), function (data) {
+						var html = new HtmlRespones(data, opts);
+						html.è°ƒç”¨æ–¹æ³•;
 				});
 			});
 		}
 	};
 
-	$.fn.cityTownQuery.defaults = {
-		// ĞèÒªÌî³äµÄÔªËØÎ»ÖÃ
-		fillEle: '',
-		// Ìá½»µØÖ·
-		postUrl: '',
-		// Ìá½»Êı¾İ
-		postData: null,
-		// ±êÌâ
+	$.fn.cascadeQuery.defaults = {
+		// éœ€è¦å¡«å……çš„å…ƒç´ ä½ç½®
+		fill: '',
+		// æäº¤åœ°å€
+		url: '',
+		// æäº¤æ•°æ®
+		data: null,
+		// æ ‡é¢˜
 		title: '',
-		// ÊÇ·ñ¿çÓòÇëÇó
+		// æ˜¯å¦è·¨åŸŸè¯·æ±‚
 		crossDomain: false
 	};
 })(window.jQuery);
