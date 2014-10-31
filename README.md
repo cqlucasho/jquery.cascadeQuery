@@ -7,16 +7,16 @@ jquery.cascadeQuery
 
 	$(document).ready(function () {
 	
-		$("#CityID").cascadeQuery({
+		$("#xx").cascadeQuery({
 		
 		  // 需要填充的元素
-			fillEle: $("#TownID"),
+			fill: $("#TownID"),
 			
 			// url提交地址
-			postUrl: "/post",
+			url: "/post",
 			
-			// 提交数据以数组形式，假设以$('#CityID').val()获取值作为id的值
-			postData: new Array("id:$('#CityID').val()"),
+			// 提交数据以数组形式，假设以$('#xx').val()获取值作为id的值
+			data: new Array("id:$('#xxx').val()"),
 			
 			title: "xx"
 			
