@@ -1,5 +1,5 @@
 (function ($) {
-	var HtmlRespones = function ($data, $opts) {
+	var HtmlRender = function ($data, $opts) {
 		this.data = $data;
 		this.opts = $opts;
 
@@ -27,7 +27,7 @@
 		if (!opts.crossDomain) {
 			// Change事件触发
 			$(this).change(function () {
-				if (opts.postData !== null) {
+				if (opts.data !== null) {
 					$.each(opts.data, function (index, dataValue) {
 						if (index > 0) values += ',';
 
@@ -42,7 +42,7 @@
 					values += '}';
 
 					$.post(opts.url, JSON.parse(values), function (data) {
-						var html = new HtmlRespones(data, opts);
+						var html = new HtmlRender(data, opts);
 						html.调用方法;
 					});
 				}
@@ -56,7 +56,7 @@
 				var id = $(this).val();
 
 				$.getJSON(opts.url, JSON.parse(values), function (data) {
-						var html = new HtmlRespones(data, opts);
+						var html = new HtmlRender(data, opts);
 						html.调用方法;
 				});
 			});
