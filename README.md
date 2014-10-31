@@ -4,6 +4,7 @@ jquery.cascadeQuery
 二级级联动态查询(不支持更多级)
 
 调用插件：
+
 (function ($) {
 	$(document).ready(function () {
 		$("#CityID").cascadeQuery({
