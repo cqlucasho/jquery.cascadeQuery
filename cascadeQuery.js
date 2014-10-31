@@ -23,56 +23,51 @@
 	$.fn.cascadeQuery = function ($options) {
 		var opts = $.extend({}, $.fn.cascadeQuery.defaults, $options);
 		var values = '{';
+		
+		// Change事件触发
+		$(this).change(function () {
+			if (opts.data !== null) {
+				$.each(opts.data, function (index, dataValue) {
+					if (index > 0) values += ',';
 
-		if (!opts.crossDomain) {
-			// Change事件触发
-			$(this).change(function () {
-				if (opts.data !== null) {
-					$.each(opts.data, function (index, dataValue) {
-						if (index > 0) values += ',';
-
-						if ($.isNumeric(dataValue)) {
-							values += '"id":' + dataValue;
-						}
-						else {
-							var arr = dataValue.split(':');
-							values += '"' + arr[0] + '"' + ':' + eval(arr[1]);
-						}
-					});
-					values += '}';
-
+					if ($.isNumeric(dataValue)) {
+						values += '"id":' + dataValue;
+					}
+					else {
+						var arr = dataValue.split(':');
+						values += '"' + arr[0] + '"' + ':' + eval(arr[1]);
+					}
+				});
+				values += '}';
+				
+				if (!opts.crossDomain) {
 					$.post(opts.url, JSON.parse(values), function (data) {
 						var html = new HtmlRender(data, opts);
 						html.调用方法;
 					});
 				}
 				else {
-					alert("post data is null");
-				}
-			});
-		}
-		else {
-			$(this).change(function () {
-				var id = $(this).val();
-
-				$.getJSON(opts.url, JSON.parse(values), function (data) {
+					$.getJSON(opts.url, JSON.parse(values), function (data) {
 						var html = new HtmlRender(data, opts);
 						html.调用方法;
-				});
-			});
-		}
-	};
+					});
+				}
+			}
+			else {
+				alert("post data is null");
+			}
+		});
 
-	$.fn.cascadeQuery.defaults = {
-		// 需要填充的元素位置
-		fill: '',
-		// 提交地址
-		url: '',
-		// 提交数据
-		data: null,
-		// 标题
-		title: '',
-		// 是否跨域请求
-		crossDomain: false
-	};
+		$.fn.cascadeQuery.defaults = {
+			// 需要填充的元素位置
+			fill: '',
+			// 提交地址
+			url: '',
+			// 提交数据
+			data: null,
+			// 标题
+			title: '',
+			// 是否跨域请求
+			crossDomain: false
+		};
 })(window.jQuery);
