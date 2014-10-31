@@ -22,11 +22,12 @@
 
 	$.fn.cascadeQuery = function ($options) {
 		var opts = $.extend({}, $.fn.cascadeQuery.defaults, $options);
-		var values = '{';
 		
 		// Change事件触发
 		$(this).change(function () {
 			if (opts.data !== null) {
+				var values = '{';
+				
 				$.each(opts.data, function (index, dataValue) {
 					if (index > 0) values += ',';
 
