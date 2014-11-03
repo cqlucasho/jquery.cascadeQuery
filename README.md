@@ -23,6 +23,9 @@ jquery.cascadeQuery
 			 */
 			data: new Array( "id:$('#xxx').val()", "title:$('#xxx').attr('title')" ),
 			
+			// 调用填充方法
+			method: "$.HtmlRenderObj.areaLinkQuery()",
+			
 			title: "xx"
 			
 		});
