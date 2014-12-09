@@ -29,7 +29,8 @@ jquery.cascadeQuery
 			// 调用填充方法
 			method: "$.HtmlRenderObj.areaLinkQuery()",
 			
-			title: "xx"
+			// 附加数据， 此数据不作为提交参数
+			extra: new array($("#test").val(), $("#test1").val())
 			
 		});
 		
