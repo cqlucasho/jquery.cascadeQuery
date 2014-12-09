@@ -12,8 +12,11 @@ jquery.cascadeQuery
 	
 		$("#xx").cascadeQuery({
 		
-		  // 需要填充的元素
+		  	// 需要填充的元素
 			fill: $("#xxx"),
+			
+			// 指定提交请求类型, 默认为GET
+			submitMethod: 'GET',
 			
 			// url提交地址
 			url: "/post",
