@@ -109,7 +109,7 @@
 		// 指定htmlRender的调用方法
 		method: '',
 		// 附加数据, 此数据不作为参数提交
-		extra: '',
+		extra: null,
 		// 是否跨域请求
 		crossDomain: false
 	};
