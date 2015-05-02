@@ -5,7 +5,7 @@
  * @author: lucasho
  * @update: 2014-12-9
  * @email: cqlucasho@gmail.com
- * @link: www.lucasho.cn.vc
+ * @link: www.iamhby.com
  * @version 1.0
  */
 (function ($) {
